@@ -28,6 +28,10 @@ export class PeliculasService {
     return this.getQuery('/discover/movie?sort_by=popularity.desc?&apiKey=').pipe(map( res => res ));
   }
 
+  buscarPelicula() {
+    return this.getQuery('/search/movie?query=').pipe(map( res => res ));
+  }
+
 }
   //To use jsonp, call http method as 'http.jsonp(url, 'callback');
 
