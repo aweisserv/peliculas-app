@@ -24,6 +24,19 @@ export class PeliculasService {
 
   }
 
+  getCartelera(){
+
+    let desde = new Date();
+    let hasta = new Date();
+    hasta.setDate( hasta.getDate() + 7 );
+
+    let desdeStr = `${ desde.getFullYear() }-${ desde.getMonth()+1 }-${ desde.getDate() }`
+    let hastaStr = `${ hasta.getFullYear() }-${ hasta.getMonth()+1 }-${ hasta.getDate() }`
+
+    return this.getQuery('/discover/movie?primary_release_date.gte=${ desdeStr }&primary_release_date.lte=${ hastaStr }&api_key=').pipe(map( res => res ));
+  }
+
+
   getPopulares() {
     return this.getQuery('/discover/movie?sort_by=popularity.desc?&apiKey=').pipe(map( res => res ));
   }
