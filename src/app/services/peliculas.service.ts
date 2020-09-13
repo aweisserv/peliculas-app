@@ -1,5 +1,5 @@
 import { Injectable } from '@angular/core';
-import { HttpClient, HttpHeaders, HttpClientJsonpModule } from '@angular/common/http';
+import { HttpClient, HttpHeaders } from '@angular/common/http';
 import { map } from 'rxjs/operators';
 
 
@@ -8,7 +8,7 @@ import { map } from 'rxjs/operators';
 })
 export class PeliculasService {
 
-  constructor(  private  http: HttpClient, private jsonp: HttpClientJsonpModule ) { }
+  constructor(  private  http: HttpClient ) { }
 
   getQuery(query: string) {
 
@@ -33,7 +33,7 @@ export class PeliculasService {
     let desdeStr = `${ desde.getFullYear() }-${ desde.getMonth()+1 }-${ desde.getDate() }`
     let hastaStr = `${ hasta.getFullYear() }-${ hasta.getMonth()+1 }-${ hasta.getDate() }`
 
-    return this.getQuery('/discover/movie?primary_release_date.gte=${ desdeStr }&primary_release_date.lte=${ hastaStr }&api_key=').pipe(map( res => res ));
+    return this.getQuery(`/discover/movie?primary_release_date.gte=${ desdeStr }&primary_release_date.lte=${ hastaStr }&api_key=`).pipe(map( res => res ));
   }
 
 
@@ -41,8 +41,8 @@ export class PeliculasService {
     return this.getQuery('/discover/movie?sort_by=popularity.desc?&apiKey=').pipe(map( res => res ));
   }
 
-  buscarPelicula() {
-    return this.getQuery('/search/movie?query=').pipe(map( res => res ));
+  buscarPelicula( texto:string ) {
+    return this.getQuery(`/search/movie?query=${ texto }&sort_by=popularity.desc&api_key=`).pipe(map( res => res ));
   }
 
 }
