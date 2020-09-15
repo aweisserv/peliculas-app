@@ -11,7 +11,7 @@ export class AppComponent {
   constructor( public ps:PeliculasService ) {
 
     this.ps.getPopulares()
-      .subscribe( data => console.log(data) )
+      .subscribe( data => console.log("getPopulares", data) )
 
   }
 

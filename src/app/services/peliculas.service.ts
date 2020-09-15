@@ -30,8 +30,8 @@ export class PeliculasService {
     let hasta = new Date();
     hasta.setDate( hasta.getDate() + 7 );
 
-    let desdeStr = `${ desde.getFullYear() }-${ desde.getMonth()+1 }-${ desde.getDate() }`
-    let hastaStr = `${ hasta.getFullYear() }-${ hasta.getMonth()+1 }-${ hasta.getDate() }`
+    let desdeStr = desde.toISOString().substring(0,10);
+    let hastaStr = hasta.toISOString().substring(0,10);
 
     return this.getQuery(`/discover/movie?primary_release_date.gte=${ desdeStr }&primary_release_date.lte=${ hastaStr }&api_key=`).pipe(map( res => res ));
   }

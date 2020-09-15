@@ -5,6 +5,9 @@ import { HttpClientModule, HttpClientJsonpModule } from '@angular/common/http';
 //Servicios
 import { PeliculasService } from "./services/peliculas.service"
 
+//Pipes
+import { PeliculaImagenPipe } from './pipes/pelicula-imagen.pipe';
+
 import { APP_ROUTING } from "./app.routes"
 
 import { AppComponent } from './app.component';
@@ -19,7 +22,8 @@ import { BuscarComponent } from './components/buscar/buscar.component';
     NavbarComponent,
     HomeComponent,
     PeliculaComponent,
-    BuscarComponent
+    BuscarComponent,
+    PeliculaImagenPipe
   ],
   imports: [
     BrowserModule,
