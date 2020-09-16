@@ -33,16 +33,20 @@ export class PeliculasService {
     let desdeStr = desde.toISOString().substring(0,10);
     let hastaStr = hasta.toISOString().substring(0,10);
 
-    return this.getQuery(`/discover/movie?primary_release_date.gte=${ desdeStr }&primary_release_date.lte=${ hastaStr }&api_key=`).pipe(map( res => res ));
+    return this.getQuery(`/discover/movie?primary_release_date.gte=${ desdeStr }&primary_release_date.lte=${ hastaStr }&api_key=`).pipe(map( ( res: any ) => res.results ));
   }
 
 
   getPopulares() {
-    return this.getQuery('/discover/movie?sort_by=popularity.desc?&apiKey=').pipe(map( res => res ));
+    return this.getQuery('/discover/movie?sort_by=popularity.desc?&apiKey=').pipe(map( ( res: any ) => res.results ));
+  }
+
+  getPopularesNinos() {
+    return this.getQuery('/discover/movie?certification_country=US&certification.lte=G&sort_by=popularity.desc&apiKey=').pipe(map( ( res: any ) => res.results ));
   }
 
   buscarPelicula( texto:string ) {
-    return this.getQuery(`/search/movie?query=${ texto }&sort_by=popularity.desc&api_key=`).pipe(map( res => res ));
+    return this.getQuery(`/search/movie?query=${ texto }&sort_by=popularity.desc&api_key=`).pipe(map( ( res: any ) => res.results ));
   }
 
 }

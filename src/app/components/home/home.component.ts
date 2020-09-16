@@ -14,9 +14,9 @@ export class HomeComponent implements OnInit {
   constructor( public ps: PeliculasService ) { 
 
     this.ps.getCartelera()
-        .subscribe( (data: any) => {
-          console.log( "getCartelera",  data.results );
-          this.cartelera = data.results;
+        .subscribe( data => {
+          console.log( "getCartelera",  data );
+          this.cartelera = data;
         });
 
   }
