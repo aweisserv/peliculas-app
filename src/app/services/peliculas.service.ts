@@ -1,6 +1,8 @@
 import { Injectable } from '@angular/core';
 import { HttpClient, HttpHeaders } from '@angular/common/http';
 import { map } from 'rxjs/operators';
+import { Observable } from 'rxjs';
+import { CarteleraResponse } from '../interfaces/cartelera-response';
 
 
 @Injectable({
@@ -24,7 +26,7 @@ export class PeliculasService {
 
   }
 
-  getCartelera(){
+  getCartelera():Observable<CarteleraResponse>{
 
     let desde = new Date();
     let hasta = new Date();
@@ -33,12 +35,12 @@ export class PeliculasService {
     let desdeStr = desde.toISOString().substring(0,10);
     let hastaStr = hasta.toISOString().substring(0,10);
 
-    return this.getQuery(`/discover/movie?primary_release_date.gte=${ desdeStr }&primary_release_date.lte=${ hastaStr }&api_key=`).pipe(map( ( res: any ) => res.results ));
+    return this.getQuery(`/discover/movie?primary_release_date.gte=${ desdeStr }&include_adult=true&primary_release_date.lte=${ hastaStr }&api_key=`).pipe(map( ( res: any ) => res.results ));
   }
 
 
   getPopulares() {
-    return this.getQuery('/discover/movie?sort_by=popularity.desc?&apiKey=').pipe(map( ( res: any ) => res.results ));
+    return this.getQuery('/discover/movie?sort_by=popularity.desc?&include_adult=true&apiKey=').pipe(map( ( res: any ) => res.results ));
   }
 
   getPopularesNinos() {
@@ -46,7 +48,7 @@ export class PeliculasService {
   }
 
   buscarPelicula( texto:string ) {
-    return this.getQuery(`/search/movie?query=${ texto }&sort_by=popularity.desc&api_key=`).pipe(map( ( res: any ) => res.results ));
+    return this.getQuery(`/search/movie?query=${ texto }&include_adult=true&sort_by=popularity.desc&api_key=`).pipe(map( ( res: any ) => res.results ));
   }
 
 }
