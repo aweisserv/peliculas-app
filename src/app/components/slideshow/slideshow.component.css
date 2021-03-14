@@ -1,10 +1,10 @@
 .swiper-container {
-    height: 500px;
+    height: 600px;
     width: 100%;
 }
 
 .swiper-button-prev, .swiper-button-next {
-    color: rgb(41, 42, 43);
+    color: rgb(125, 158, 192);
 }
 
 .movie-description {

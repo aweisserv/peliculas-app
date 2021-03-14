@@ -1,4 +1,5 @@
 import { Component, OnInit, Input } from '@angular/core';
+import { Movie } from 'src/app/interfaces/cartelera-response';
 
 @Component({
   selector: 'app-galeria',
@@ -8,7 +9,7 @@ import { Component, OnInit, Input } from '@angular/core';
 })
 export class GaleriaComponent implements OnInit {
 
-  @Input('peliculas') peliculas;
+  @Input() movies: Movie[];
 
   constructor() { }
 

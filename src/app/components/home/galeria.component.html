@@ -1,11 +1,11 @@
-<div class="row" *ngIf="peliculas">
+<div class="row" *ngIf="movies">
 
     <div class="col-sm-6">
 
       <div class="row">
 
         <div class="col-md-12 div-pic-1"
-            [ngStyle]="{ 'background-image': 'url( '+ ( peliculas[0] | peliculaImagen ) +' )' }">
+            [ngStyle]="{ 'background-image': 'url( '+ ( movies[0] | peliculaImagen ) +' )' }">
         </div>
 
       </div>
@@ -14,11 +14,11 @@
       <div class="row">
 
         <div class="col-sm-6 div-pic-2"
-            [ngStyle]="{ 'background-image': 'url( '+ ( peliculas[1] | peliculaImagen ) +' )' }">
+            [ngStyle]="{ 'background-image': 'url( '+ ( movies[1] | peliculaImagen ) +' )' }">
       </div>    
 
         <div class="col-sm-6 div-pic-2"
-            [ngStyle]="{ 'background-image': 'url( '+ ( peliculas[2] | peliculaImagen ) +' )' }">
+            [ngStyle]="{ 'background-image': 'url( '+ ( movies[2] | peliculaImagen ) +' )' }">
 
         </div>
 
@@ -31,11 +31,11 @@
     <div class="row">
 
       <div class="col-sm-6 div-pic-2"
-          [ngStyle]="{ 'background-image': 'url( '+ ( peliculas[3] | peliculaImagen ) +' )' }">
+          [ngStyle]="{ 'background-image': 'url( '+ ( movies[3] | peliculaImagen ) +' )' }">
       </div>
 
       <div class="col-sm-6 div-pic-2"
-          [ngStyle]="{ 'background-image': 'url( '+ ( peliculas[4] | peliculaImagen ) +' )' }">
+          [ngStyle]="{ 'background-image': 'url( '+ ( movies[4] | peliculaImagen ) +' )' }">
       </div>
 
     </div>
@@ -43,7 +43,7 @@
     <div class="row">
 
       <div class="col-md-12 div-pic-1"
-          [ngStyle]="{ 'background-image': 'url( '+ ( peliculas[5] | peliculaImagen ) +' )' }">
+          [ngStyle]="{ 'background-image': 'url( '+ ( movies[5] | peliculaImagen ) +' )' }">
       </div>
 
     </div>
