@@ -18,6 +18,7 @@ import { BuscarComponent } from './components/buscar/buscar.component';
 import { GaleriaComponent } from './components/home/galeria.component';
 import { AppRoutingModule } from './app-routing.module';
 import { SlideshowComponent } from './components/slideshow/slideshow.component';
+import { PeliculasPosterGridComponent } from './components/peliculas-poster-grid/peliculas-poster-grid.component';
 
 @NgModule({
   declarations: [
@@ -28,7 +29,8 @@ import { SlideshowComponent } from './components/slideshow/slideshow.component';
     BuscarComponent,
     PeliculaImagenPipe,
     GaleriaComponent,
-    SlideshowComponent
+    SlideshowComponent,
+    PeliculasPosterGridComponent
   ],
   imports: [
     BrowserModule,

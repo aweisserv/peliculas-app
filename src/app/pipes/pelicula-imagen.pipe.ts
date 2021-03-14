@@ -1,11 +1,12 @@
 import { Pipe, PipeTransform } from '@angular/core';
+import { Movie } from '../interfaces/cartelera-response';
 
 @Pipe({
   name: 'peliculaImagen'
 })
 export class PeliculaImagenPipe implements PipeTransform {
 
-  transform( movie: any ): any {
+  transform( movie: Movie ): any {
 
     let url = "https://image.tmdb.org/t/p/original";
 

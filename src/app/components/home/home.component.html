@@ -1,14 +1,7 @@
-<div class="jumbotron jumbotron-fluid">
-    <div class="container">
-      <h1 class="display-4">Librería de películas</h1>
-      <p class="lead">Aquí encontrarás todo lo que necesitas sobre tus peliculas favoritas.</p>
-    </div>
-</div>
-
 <div class="container">
   <br>
   <h1>Cartelera</h1>
-
+  <br>
   <div class="row" *ngIf="movies.length > 0">
     <div class="col">
 
@@ -17,8 +10,9 @@
   </div>
   
   <h1 class="mt-5">Peliculas</h1>
-  <app-galeria [movies]="movies|slice:0:6"></app-galeria>
-      <br>
+  <app-peliculas-poster-grid *ngIf="movies.length > 0" 
+            [movies]="movies"></app-peliculas-poster-grid>
+  <br>
 </div>
 
 
