@@ -7,9 +7,17 @@
 
 <div class="container">
   <br>
-
   <h1>Cartelera</h1>
   <hr>
   <app-galeria [peliculas]="cartelera|slice:0:6"></app-galeria>
 
+  <div class="row" *ngIf="movies.length > 0">
+    <div class="col">
+      <app-slideshow [movies]="movies"></app-slideshow>
+    </div>
+  </div>
+  
 </div>
+
+
+

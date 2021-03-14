@@ -1,0 +1,16 @@
+.swiper-container {
+    height: 500px;
+    width: 100%;
+}
+
+.swiper-button-prev, .swiper-button-next {
+    color: rgb(41, 42, 43);
+}
+
+.movie-description {
+    background-color: rgb(243, 243, 243);
+    bottom: 0;
+    padding: 5px 60px;
+    position: absolute;
+    width: 100%;
+}

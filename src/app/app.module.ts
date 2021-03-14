@@ -17,6 +17,7 @@ import { PeliculaComponent } from './components/pelicula/pelicula.component';
 import { BuscarComponent } from './components/buscar/buscar.component';
 import { GaleriaComponent } from './components/home/galeria.component';
 import { AppRoutingModule } from './app-routing.module';
+import { SlideshowComponent } from './components/slideshow/slideshow.component';
 
 @NgModule({
   declarations: [
@@ -26,7 +27,8 @@ import { AppRoutingModule } from './app-routing.module';
     PeliculaComponent,
     BuscarComponent,
     PeliculaImagenPipe,
-    GaleriaComponent
+    GaleriaComponent,
+    SlideshowComponent
   ],
   imports: [
     BrowserModule,
