@@ -9,7 +9,6 @@ import { Movie } from 'src/app/interfaces/cartelera-response';
 export class PeliculasPosterGridComponent implements OnInit {
 
   @Input() movies: Movie[];
-  
 
   constructor() { }
 

@@ -19,6 +19,7 @@ import { GaleriaComponent } from './components/home/galeria.component';
 import { AppRoutingModule } from './app-routing.module';
 import { SlideshowComponent } from './components/slideshow/slideshow.component';
 import { PeliculasPosterGridComponent } from './components/peliculas-poster-grid/peliculas-poster-grid.component';
+import { RatingModule } from 'ng-starrating';
 
 @NgModule({
   declarations: [
@@ -36,7 +37,8 @@ import { PeliculasPosterGridComponent } from './components/peliculas-poster-grid
     BrowserModule,
     HttpClientModule,
     HttpClientJsonpModule,
-    AppRoutingModule
+    AppRoutingModule,
+    RatingModule
   ],
   providers: [
     PeliculasService

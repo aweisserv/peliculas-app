@@ -10,19 +10,28 @@ import { CarteleraResponse } from '../interfaces/cartelera-response';
 })
 export class PeliculasService {
 
+  private baseUrl: 'https://api.themoviedb.org/3/';
+  private carteleraPage = 1;
+
   constructor(  private  http: HttpClient ) { }
 
+  get params() {
+    return {
+      api_key: '08ba5c8d49c4d5b05eb685b51c17cc2b',
+      language: 'es-ES',
+      page: this.carteleraPage.toString()
+    }
+  }
+
   getQuery(query: string) {
-
-    let apiKey: string='08ba5c8d49c4d5b05eb685b51c17cc2b';
-
-    const urlMovieDb = `https://api.themoviedb.org/3/${query}${apiKey}`;
+    
+    const urlMovieDb = `https://api.themoviedb.org/3/${query}`;
 
     const headers = new HttpHeaders({
       'Authorization': 'Bearer eyJhbGciOiJIUzI1NiJ9.eyJhdWQiOiJmZjliMjFkOTJmNjJkZDYwZTQxNzU3Yzc0ZDAzZDcyOCIsInN1YiI6IjVlNmJmYmM0MzU3YzAwMDAxMTQwYWVlZiIsInNjb3BlcyI6WyJhcGlfcmVhZCJdLCJ2ZXJzaW9uIjoxfQ.ZxnGubGV4gRNjR6wB-hwoSHyz75GnkjmIMUi8jsJFlE'
     });
 
-    return this.http.get(urlMovieDb, {headers});
+    return this.http.get(urlMovieDb, {params: this.params, headers});
 
   }
 
@@ -35,12 +44,12 @@ export class PeliculasService {
     let desdeStr = desde.toISOString().substring(0,10);
     let hastaStr = hasta.toISOString().substring(0,10);
 
-    return this.getQuery(`/discover/movie?primary_release_date.gte=${ desdeStr }&include_adult=true&primary_release_date.lte=${ hastaStr }&api_key=`).pipe(map( ( res: CarteleraResponse ) => res ));
+    return this.getQuery(`/discover/movie?primary_release_date.gte=${ desdeStr }&primary_release_date.lte=${ hastaStr }`).pipe(map( ( res: CarteleraResponse ) => res ));
   }
 
 
   getPopulares() {
-    return this.getQuery('/discover/movie?sort_by=popularity.desc?&include_adult=true&apiKey=').pipe(map( ( res: any ) => res.results ));
+    return this.getQuery('/discover/movie?sort_by=popularity.desc?').pipe(map( ( res: any ) => res.results ));
   }
 
   getPopularesNinos() {
