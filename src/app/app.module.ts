@@ -20,6 +20,7 @@ import { AppRoutingModule } from './app-routing.module';
 import { SlideshowComponent } from './components/slideshow/slideshow.component';
 import { PeliculasPosterGridComponent } from './components/peliculas-poster-grid/peliculas-poster-grid.component';
 import { RatingModule } from 'ng-starrating';
+import { PosterPipe } from './pipes/poster.pipe';
 
 @NgModule({
   declarations: [
@@ -31,7 +32,8 @@ import { RatingModule } from 'ng-starrating';
     PeliculaImagenPipe,
     GaleriaComponent,
     SlideshowComponent,
-    PeliculasPosterGridComponent
+    PeliculasPosterGridComponent,
+    PosterPipe
   ],
   imports: [
     BrowserModule,

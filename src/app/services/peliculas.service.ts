@@ -1,8 +1,8 @@
 import { Injectable } from '@angular/core';
 import { HttpClient, HttpHeaders } from '@angular/common/http';
-import { map } from 'rxjs/operators';
-import { Observable } from 'rxjs';
-import { CarteleraResponse } from '../interfaces/cartelera-response';
+import { map, tap } from 'rxjs/operators';
+import { Observable, of } from 'rxjs';
+import { CarteleraResponse, Movie } from '../interfaces/cartelera-response';
 
 
 @Injectable({
@@ -10,8 +10,8 @@ import { CarteleraResponse } from '../interfaces/cartelera-response';
 })
 export class PeliculasService {
 
-  private baseUrl: 'https://api.themoviedb.org/3/';
   private carteleraPage = 1;
+  public cargando = false;
 
   constructor(  private  http: HttpClient ) { }
 
@@ -25,17 +25,41 @@ export class PeliculasService {
 
   getQuery(query: string) {
     
+
     const urlMovieDb = `https://api.themoviedb.org/3/${query}`;
 
     const headers = new HttpHeaders({
       'Authorization': 'Bearer eyJhbGciOiJIUzI1NiJ9.eyJhdWQiOiJmZjliMjFkOTJmNjJkZDYwZTQxNzU3Yzc0ZDAzZDcyOCIsInN1YiI6IjVlNmJmYmM0MzU3YzAwMDAxMTQwYWVlZiIsInNjb3BlcyI6WyJhcGlfcmVhZCJdLCJ2ZXJzaW9uIjoxfQ.ZxnGubGV4gRNjR6wB-hwoSHyz75GnkjmIMUi8jsJFlE'
     });
+    
 
-    return this.http.get(urlMovieDb, {params: this.params, headers});
+    if ( query == '/search/movie' ){
+   
+      const params = { ...this.params, page: '1' };
+      return this.http.get<CarteleraResponse>(urlMovieDb, { params: params, headers })
+    }
+
+
+    return this.http.get<CarteleraResponse>(urlMovieDb, { params: this.params, headers })
+                      .pipe(
+                        map( (resp)=>resp.results ),
+                        tap( () => {
+                          this.carteleraPage += 1;
+                          this.cargando = false;
+                        } )
+                      );
 
   }
 
-  getCartelera():Observable<CarteleraResponse>{
+  getCartelera():Observable<Movie[]>{
+
+    if( this.cargando ) {
+      // cargando películas
+      return of ([]);
+    }
+
+    this.cargando = true;
+    console.log("Cargando API");
 
     let desde = new Date();
     let hasta = new Date();
@@ -44,7 +68,7 @@ export class PeliculasService {
     let desdeStr = desde.toISOString().substring(0,10);
     let hastaStr = hasta.toISOString().substring(0,10);
 
-    return this.getQuery(`/discover/movie?primary_release_date.gte=${ desdeStr }&primary_release_date.lte=${ hastaStr }`).pipe(map( ( res: CarteleraResponse ) => res ));
+    return this.getQuery(`/discover/movie?primary_release_date.gte=${ desdeStr }&primary_release_date.lte=${ hastaStr }`).pipe(map( ( res: Movie[] ) => res ));
   }
 
 
@@ -58,6 +82,15 @@ export class PeliculasService {
 
   buscarPelicula( texto:string ) {
     return this.getQuery(`/search/movie?query=${ texto }&include_adult=true&sort_by=popularity.desc&api_key=`).pipe(map( ( res: any ) => res.results ));
+  }
+
+  
+  buscarPeliculas ( texto: string ){
+
+
+    return this.getQuery(`/search/movie`);
+
+    //this.http.get(`${ this.baseUrl }/search`)
   }
 
 }
