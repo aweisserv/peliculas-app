@@ -23,22 +23,13 @@ export class PeliculasService {
     }
   }
 
-  getQuery(query: string) {
-    
+  getQuery(query: string) {    
 
     const urlMovieDb = `https://api.themoviedb.org/3/${query}`;
 
     const headers = new HttpHeaders({
       'Authorization': 'Bearer eyJhbGciOiJIUzI1NiJ9.eyJhdWQiOiJmZjliMjFkOTJmNjJkZDYwZTQxNzU3Yzc0ZDAzZDcyOCIsInN1YiI6IjVlNmJmYmM0MzU3YzAwMDAxMTQwYWVlZiIsInNjb3BlcyI6WyJhcGlfcmVhZCJdLCJ2ZXJzaW9uIjoxfQ.ZxnGubGV4gRNjR6wB-hwoSHyz75GnkjmIMUi8jsJFlE'
     });
-    
-
-    if ( query == '/search/movie' ){
-   
-      const params = { ...this.params, page: '1' };
-      return this.http.get<CarteleraResponse>(urlMovieDb, { params: params, headers })
-    }
-
 
     return this.http.get<CarteleraResponse>(urlMovieDb, { params: this.params, headers })
                       .pipe(
@@ -48,7 +39,6 @@ export class PeliculasService {
                           this.cargando = false;
                         } )
                       );
-
   }
 
   getCartelera():Observable<Movie[]>{
@@ -80,8 +70,15 @@ export class PeliculasService {
     return this.getQuery('/discover/movie?certification_country=US&certification.lte=G&sort_by=popularity.desc&apiKey=').pipe(map( ( res: any ) => res.results ));
   }
 
-  buscarPelicula( texto:string ) {
-    return this.getQuery(`/search/movie?query=${ texto }&include_adult=true&sort_by=popularity.desc&api_key=`).pipe(map( ( res: any ) => res.results ));
+  buscarPelicula( texto: string ): Observable<Movie[]> {
+
+    const urlMovieDb = `https://api.themoviedb.org/3/`
+    const params = { ...this.params, page: '1', query: texto };
+    const headers = new HttpHeaders({
+      'Authorization': 'Bearer eyJhbGciOiJIUzI1NiJ9.eyJhdWQiOiJmZjliMjFkOTJmNjJkZDYwZTQxNzU3Yzc0ZDAzZDcyOCIsInN1YiI6IjVlNmJmYmM0MzU3YzAwMDAxMTQwYWVlZiIsInNjb3BlcyI6WyJhcGlfcmVhZCJdLCJ2ZXJzaW9uIjoxfQ.ZxnGubGV4gRNjR6wB-hwoSHyz75GnkjmIMUi8jsJFlE'
+    });
+    return this.http.get<Movie[]>(`${urlMovieDb}/search/movie`, { params, headers }).pipe(map( ( res: any ) => res.results ));
+
   }
 
   
