@@ -1,8 +1,13 @@
-<h1>Resultados de búsqueda: <small class="text-capitalize"> {{texto}} </small></h1>
-<hr>
+<div class="container">
+    <br>
+    <h1>Resultados de búsqueda: <small class="text-capitalize"> {{texto}} </small></h1>
 
-<div class="row">
-    <div class="col">
-        <app-peliculas-poster-grid [movies]="movies"></app-peliculas-poster-grid>
+    <hr>
+
+    <div class="row">
+        <div class="col">
+            <app-peliculas-poster-grid [movies]="movies"></app-peliculas-poster-grid>
+        </div>
     </div>
+
 </div>

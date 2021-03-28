@@ -1,4 +1,5 @@
 import { Pipe, PipeTransform } from '@angular/core';
+import { Movie } from '../interfaces/cartelera-response';
 
 @Pipe({
   name: 'poster'
@@ -6,17 +7,18 @@ import { Pipe, PipeTransform } from '@angular/core';
 export class PosterPipe implements PipeTransform {
 
 
+  transform( movie: Movie ): any {
 
-  transform( poster: string ): string {
+    let url = "https://image.tmdb.org/t/p/original";
 
-      // https://image.tmdb.org/t/p/original/{{ movie.poster_path }}
-
-      if ( poster ) {
-        return `https:image.tmdb.org/t/p/original/${ poster }`
-      } else {
-        return './assets/img/no-img.jpg'
-      }
-    
+    if( movie.poster_path ){
+      return url + movie.poster_path;
+    }else if( movie.backdrop_path ){
+        return url + movie.backdrop_path;
+    }else{
+      return './assets/img/no-img.jpg'
+    }
   }
 
 }
+

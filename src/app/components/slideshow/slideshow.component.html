@@ -3,10 +3,10 @@
   <!-- Additional required wrapper -->
   <div class="swiper-wrapper">
     <!-- Slides -->
-    <div *ngFor="let movie of movies"  class="swiper-slide"
+    <div *ngFor="let movie of movies; let i = index" class="swiper-slide"
         [ngStyle]="{
             'background-size': 'cover',
-            'background-image': 'url(https://image.tmdb.org/t/p/original'+ movie.backdrop_path +')'
+            'background-image': 'url( '+ ( movies[i] | peliculaImagen ) +' )'
         }">
 
         <div class="movie-description">

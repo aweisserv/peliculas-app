@@ -23,6 +23,10 @@ export class PeliculasService {
     }
   }
 
+  resetCarteleraPage(){
+    this.carteleraPage = 1;
+  }
+
   getQuery(query: string) {    
 
     const urlMovieDb = `https://api.themoviedb.org/3/${query}`;
