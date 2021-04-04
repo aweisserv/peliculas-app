@@ -3,7 +3,7 @@
 
         <img [src]="movie | poster"
             class="img-fluid poster"
-            >
+            (click)="onMovieClick( movie )">
         <div>
             <h3>{{ movie.title }}</h3>
         </div>

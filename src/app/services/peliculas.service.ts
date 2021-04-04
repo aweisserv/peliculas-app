@@ -3,6 +3,7 @@ import { HttpClient, HttpHeaders } from '@angular/common/http';
 import { map, tap } from 'rxjs/operators';
 import { Observable, of } from 'rxjs';
 import { CarteleraResponse, Movie } from '../interfaces/cartelera-response';
+import { MovieResponse } from '../interfaces/movie-response';
 
 
 @Injectable({
@@ -12,6 +13,8 @@ export class PeliculasService {
 
   private carteleraPage = 1;
   public cargando = false;
+  public urlMovieDb = `https://api.themoviedb.org/3/`
+  
 
   constructor(  private  http: HttpClient ) { }
 
@@ -67,7 +70,7 @@ export class PeliculasService {
 
 
   getPopulares() {
-    return this.getQuery('/discover/movie?sort_by=popularity.desc?').pipe(map( ( res: any ) => res.results ));
+    return this.getQuery('/discover/movie?sort_by=popularity.desc?').pipe(map( ( res: Movie[] ) => res ));
   }
 
   getPopularesNinos() {
@@ -76,25 +79,23 @@ export class PeliculasService {
 
   buscarPelicula( texto: string ): Observable<Movie[]> {
 
-    const urlMovieDb = `https://api.themoviedb.org/3/`
     const params = { ...this.params, page: '1', query: texto };
     const headers = new HttpHeaders({
       'Authorization': 'Bearer eyJhbGciOiJIUzI1NiJ9.eyJhdWQiOiJmZjliMjFkOTJmNjJkZDYwZTQxNzU3Yzc0ZDAzZDcyOCIsInN1YiI6IjVlNmJmYmM0MzU3YzAwMDAxMTQwYWVlZiIsInNjb3BlcyI6WyJhcGlfcmVhZCJdLCJ2ZXJzaW9uIjoxfQ.ZxnGubGV4gRNjR6wB-hwoSHyz75GnkjmIMUi8jsJFlE'
     });
-    return this.http.get<Movie[]>(`${urlMovieDb}/search/movie`, { params, headers }).pipe(map( ( res: any ) => res.results ));
+    return this.http.get<Movie[]>(`${this.urlMovieDb}/search/movie`, { params, headers }).pipe(map( ( res: any ) => res.results ));
 
   }
 
-  
-  buscarPeliculas ( texto: string ){
+  getPeliculaDetalle( id: string ) {
 
+    return this.http.get<MovieResponse>(`${this.urlMovieDb}/movie/${id}`,{ 
+      params: this.params });
 
-    return this.getQuery(`/search/movie`);
-
-    //this.http.get(`${ this.baseUrl }/search`)
   }
+
 
 }
-  //To use jsonp, call http method as 'http.jsonp(url, 'callback');
+
 
 
