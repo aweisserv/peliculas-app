@@ -1,3 +1,4 @@
+import { Location } from '@angular/common';
 import { Component, OnInit } from '@angular/core';
 import { ActivatedRoute } from '@angular/router';
 import { MovieResponse } from 'src/app/interfaces/movie-response';
@@ -14,7 +15,8 @@ export class PeliculaComponent implements OnInit {
   public pelicula: MovieResponse;
 
   constructor( private activatedRoute: ActivatedRoute,
-               private ps: PeliculasService  ) { }
+               private ps: PeliculasService,
+               private loc: Location ) { }
 
   ngOnInit(): void {
 
@@ -26,4 +28,8 @@ export class PeliculaComponent implements OnInit {
     })
    }
 
+   onVolver(): void {
+    this.loc.back();
+   }
+   
 }
