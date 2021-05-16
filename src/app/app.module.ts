@@ -21,6 +21,8 @@ import { SlideshowComponent } from './components/slideshow/slideshow.component';
 import { PeliculasPosterGridComponent } from './components/peliculas-poster-grid/peliculas-poster-grid.component';
 import { RatingModule } from 'ng-starrating';
 import { PosterPipe } from './pipes/poster.pipe';
+import { CastSlideshowComponent } from './components/cast-slideshow/cast-slideshow.component';
+import { ProfileImage } from './pipes/profile-image.pipe';
 
 @NgModule({
   declarations: [
@@ -33,7 +35,9 @@ import { PosterPipe } from './pipes/poster.pipe';
     GaleriaComponent,
     SlideshowComponent,
     PeliculasPosterGridComponent,
-    PosterPipe
+    PosterPipe,
+    ProfileImage,
+    CastSlideshowComponent
   ],
   imports: [
     BrowserModule,

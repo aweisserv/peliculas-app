@@ -1,9 +1,10 @@
 import { Injectable } from '@angular/core';
 import { HttpClient, HttpHeaders } from '@angular/common/http';
-import { map, tap } from 'rxjs/operators';
+import { catchError, map, tap } from 'rxjs/operators';
 import { Observable, of } from 'rxjs';
 import { CarteleraResponse, Movie } from '../interfaces/cartelera-response';
 import { MovieResponse } from '../interfaces/movie-response';
+import { Cast, CreditsResponse } from '../interfaces/credits-response';
 
 
 @Injectable({
@@ -40,7 +41,7 @@ export class PeliculasService {
 
     return this.http.get<CarteleraResponse>(urlMovieDb, { params: this.params, headers })
                       .pipe(
-                        map( (resp)=>resp.results ),
+                        map( (resp) => resp.results ),
                         tap( () => {
                           this.carteleraPage += 1;
                           this.cargando = false;
@@ -89,8 +90,22 @@ export class PeliculasService {
 
   getPeliculaDetalle( id: string ) {
 
-    return this.http.get<MovieResponse>(`${this.urlMovieDb}/movie/${id}`,{ 
-      params: this.params });
+    return this.http.get<MovieResponse>(`${this.urlMovieDb}/movie/${id}`, { 
+      params: this.params 
+    }).pipe(
+      catchError( err => of(null) )
+    )
+
+  }
+
+  getCast( id: string ): Observable<Cast[]> {
+
+    return this.http.get<CreditsResponse>(`${this.urlMovieDb}/movie/${id}/credits`, { 
+      params: this.params 
+    }).pipe(
+      map( resp => resp.cast ),
+      catchError( err => of([]) )
+    );
 
   }
 

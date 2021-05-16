@@ -47,20 +47,28 @@
                     <h5><small>Popularidad: {{ pelicula.popularity | number:'1.1-1' }}</small></h5>
 
                 </div>
-
-            </div>
-            <div class="row mt-5">
-                <div class="col text-white mt-3">
-                    <button class="btn btn-outline-info"
-                            (click)="onVolver()">
-                        Volver
-                    </button>
-
-                </div>
-
             </div>
 
         </div>
     </div>
 
+    <div class="row mt-5" *ngIf="cast.length > 0">
+        <div class="col">
+            <app-cast-slideshow [cast]="cast"></app-cast-slideshow>
+        </div>
+    
+    </div>
+
+    <div class="row mt-5">
+        <div class="col text-white mt-3">
+            <button class="btn btn-outline-info"
+                    (click)="onVolver()">
+                Volver
+            </button>
+
+        </div>
+
+    </div>
+
 </div>
+
