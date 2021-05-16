@@ -1,6 +1,6 @@
 
-
-<div class="swiper-container">
+<h3>Cast</h3>
+<div class="swiper-container mt-4 animate__animated animate__fadeIn">
     <div class="swiper-wrapper containerSlide">
         <div class="swiper-slide text-white text-center" *ngFor="let actor of cast">
             <img [src]="actor.profile_path | profile"
@@ -10,3 +10,4 @@
                  {{ actor.name }}
         </div>
     </div>
+</div>

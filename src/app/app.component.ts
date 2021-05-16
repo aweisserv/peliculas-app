@@ -1,6 +1,5 @@
 import { Component } from '@angular/core';
-import { CarteleraResponse, Movie } from './interfaces/cartelera-response';
-import { PeliculasService } from "./services/peliculas.service"
+
 
 @Component({
   selector: 'app-root',
@@ -9,10 +8,6 @@ import { PeliculasService } from "./services/peliculas.service"
 })
 export class AppComponent {
   
-  constructor( public ps:PeliculasService ) {
-
-    this.ps.getPopulares()
-      .subscribe( (data: Movie[]) => console.log("getPopulares", data) )
-  }
+  constructor() {}
   
 }
